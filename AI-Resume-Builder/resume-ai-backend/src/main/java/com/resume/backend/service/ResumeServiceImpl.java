@@ -1,6 +1,6 @@
 package com.resume.backend.service;
 
-import org.json.JSONObject;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.core.io.ClassPathResource;
@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.HashMap;
 import java.util.Map;
 
 @Service
@@ -21,7 +22,7 @@ public class ResumeServiceImpl implements ResumeService{
     }
 
     @Override
-    public JSONObject generateResumeResponse(String userResumeDescription) throws IOException {
+    public Map<String, Object> generateResumeResponse(String userResumeDescription) throws IOException {
 
         String promptTemplate = this.loadPromptTemplate("resume_ai_prompt.txt");
         String filledPrompt  = this.fillTemplatePlaceholders(promptTemplate, Map.of("userDescription", userResumeDescription));
@@ -30,8 +31,8 @@ public class ResumeServiceImpl implements ResumeService{
 
         String aiResponse  = chatClient.prompt(resumePrompt).call().content();
 
-        JSONObject jsonObject = parsePromptResponse(aiResponse);
-        return jsonObject;
+        Map<String, Object> stringObjectMap = parsePromptResponse(aiResponse);
+        return stringObjectMap;
     }
 
 
@@ -46,10 +47,10 @@ public class ResumeServiceImpl implements ResumeService{
         }
         return template;
     }
+//parsePromptResponse
 
-
-    public static JSONObject parsePromptResponse(String response) {
-        JSONObject jsonResponse = new JSONObject();
+    public static Map<String, Object> parsePromptResponse(String response) {
+        Map<String, Object> jsonResponse = new HashMap<>();
 
         // Extract content inside <think> tags
         int thinkStart = response.indexOf("<think>") + 7;
@@ -58,7 +59,7 @@ public class ResumeServiceImpl implements ResumeService{
             String thinkContent = response.substring(thinkStart, thinkEnd).trim();
             jsonResponse.put("think", thinkContent);
         } else {
-            jsonResponse.put("think", JSONObject.NULL); // Handle missing <think> tags
+            jsonResponse.put("think", null); // Handle missing <think> tags
         }
 
         // Extract content that is in JSON format
@@ -67,14 +68,16 @@ public class ResumeServiceImpl implements ResumeService{
         if (jsonStart != -1 && jsonEnd != -1 && jsonStart < jsonEnd) {
             String jsonContent = response.substring(jsonStart, jsonEnd).trim();
             try {
-                JSONObject dataContent = new JSONObject(jsonContent);
+                // Convert JSON string to Map using Jackson ObjectMapper
+                ObjectMapper objectMapper = new ObjectMapper();
+                Map<String, Object> dataContent = objectMapper.readValue(jsonContent, Map.class);
                 jsonResponse.put("data", dataContent);
             } catch (Exception e) {
-                jsonResponse.put("data", JSONObject.NULL); // Handle invalid JSON
+                jsonResponse.put("data", null); // Handle invalid JSON
                 System.err.println("Invalid JSON format in the response: " + e.getMessage());
             }
         } else {
-            jsonResponse.put("data", JSONObject.NULL); // Handle missing JSON
+            jsonResponse.put("data", null); // Handle missing JSON
         }
 
         return jsonResponse;
