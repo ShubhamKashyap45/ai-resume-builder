@@ -20,8 +20,8 @@ public class ResumeController {
         this.resumeService = resumeService;
     }
 
-    @PostMapping("/generate")
-    public ResponseEntity<JSONObject> getResumeData(
+    @PostMapping("/build")
+    public ResponseEntity<JSONObject> getResume(
             @RequestBody ResumeRequest resumeRequest
             ) throws IOException {
         JSONObject jsonObject = resumeService.generateResumeResponse(resumeRequest.userDescription());

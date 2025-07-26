@@ -23,24 +23,24 @@ public class ResumeServiceImpl implements ResumeService{
     @Override
     public JSONObject generateResumeResponse(String userResumeDescription) throws IOException {
 
-        String prompString = this.loadPromptFromFile("resume_prompt.txt");
-        String promptContent = this.putValuesToTemplate(prompString, Map.of("userDescription", userResumeDescription));
+        String promptTemplate = this.loadPromptTemplate("resume_ai_prompt.txt");
+        String filledPrompt  = this.fillTemplatePlaceholders(promptTemplate, Map.of("userDescription", userResumeDescription));
 
-        Prompt prompt = new Prompt(promptContent);
+        Prompt resumePrompt  = new Prompt(filledPrompt);
 
-        String response = chatClient.prompt(prompt).call().content();
+        String aiResponse  = chatClient.prompt(resumePrompt).call().content();
 
-        JSONObject jsonObject = parseMultipleResponses(response);
+        JSONObject jsonObject = parsePromptResponse(aiResponse);
         return jsonObject;
     }
 
 
-    String loadPromptFromFile(String filename) throws IOException {
+    String loadPromptTemplate(String filename) throws IOException {
         Path path = new ClassPathResource(filename).getFile().toPath();
         return Files.readString(path);
     }
 
-    String putValuesToTemplate(String template, Map<String, String> values){
+    String fillTemplatePlaceholders(String template, Map<String, String> values){
         for(Map.Entry<String, String> entry : values.entrySet()){
             template = template.replace("{{" + entry.getKey() + "}}", entry.getValue());
         }
@@ -48,7 +48,7 @@ public class ResumeServiceImpl implements ResumeService{
     }
 
 
-    public static JSONObject parseMultipleResponses(String response) {
+    public static JSONObject parsePromptResponse(String response) {
         JSONObject jsonResponse = new JSONObject();
 
         // Extract content inside <think> tags
