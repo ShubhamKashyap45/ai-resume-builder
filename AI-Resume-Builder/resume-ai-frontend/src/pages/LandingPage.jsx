@@ -157,11 +157,11 @@ const LandingPage = () => {
             Ready to Create Your Resume?
           </h2>
           <p className="mb-8 text-lg">
-            Join thousands of users who have landed their dream jobs with our AI
-            resume maker.
+            Get noticed. Get hired. Get hyped. Our AI resume builder is your new
+            secret weapon!
           </p>
           <Link to={"/generate-resume"} className="btn btn-primary">
-            Get Started Now
+            Build My Resume
           </Link>
         </div>
       </section>
