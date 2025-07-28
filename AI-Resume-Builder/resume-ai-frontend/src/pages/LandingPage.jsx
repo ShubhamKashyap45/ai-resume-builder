@@ -26,158 +26,148 @@ const LandingPage = () => {
       </section>
 
       {/* Features Section */}
-      <section className="py-20 bg-base-100">
+      <section className="py-20 bg-white text-gray-800">
         <div className="container mx-auto px-4">
           <h2 className="text-4xl font-bold text-center mb-16">
-            What Sets Us Apart?
+            Why Use Our Builder?
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-            {/* Feature 1 */}
-            <div className="card bg-base-200 shadow-xl hover:shadow-2xl transition-shadow">
-              <div className="card-body items-center text-center">
-                <div className="text-5xl mb-4">🤖</div>
-                <h3 className="card-title text-2xl">Smart Resume Builder</h3>
-                <p className="text-gray-500">
-                  Leverage intelligent suggestions to craft professional resumes
-                  in seconds.
-                </p>
-              </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+            <div className="p-6 bg-base-100 text-base-content rounded-xl shadow-lg hover:scale-105 transition-transform duration-300">
+              <div className="text-5xl mb-4">🧠</div>
+              <h3 className="text-xl font-semibold mb-2">AI That Thinks</h3>
+              <p>
+                Describe your skills, and let the AI craft content that sounds
+                like you—only better.
+              </p>
             </div>
-            {/* Feature 2 */}
-            <div className="card bg-base-200 shadow-xl hover:shadow-2xl transition-shadow">
-              <div className="card-body items-center text-center">
-                <div className="text-5xl mb-4">🎨</div>
-                <h3 className="card-title text-2xl">Beautiful Designs</h3>
-                <p className="text-gray-500">
-                  Choose from a variety of modern, recruiter-approved templates.
-                </p>
-              </div>
+            <div className="p-6 bg-base-100 text-base-content rounded-xl shadow-lg hover:scale-105 transition-transform duration-300">
+              <div className="text-5xl mb-4">🔧</div>
+              <h3 className="text-xl font-semibold mb-2">Fully Customizable</h3>
+              <p>
+                Edit every word, choose layouts, and make the resume uniquely
+                yours.
+              </p>
             </div>
-            {/* Feature 3 */}
-            <div className="card bg-base-200 shadow-xl hover:shadow-2xl transition-shadow">
-              <div className="card-body items-center text-center">
-                <div className="text-5xl mb-4">⚡</div>
-                <h3 className="card-title text-2xl">Fast & Easy</h3>
-                <p className="text-gray-500">
-                  Create, customize, and download your resume in just a few
-                  clicks.
-                </p>
-              </div>
+            <div className="p-6 bg-base-100 text-base-content rounded-xl shadow-lg hover:scale-105 transition-transform duration-300">
+              <div className="text-5xl mb-4">📱</div>
+              <h3 className="text-xl font-semibold mb-2">Mobile Friendly</h3>
+              <p>
+                Build and download your resume directly from your phone or
+                tablet.
+              </p>
+            </div>
+            <div className="p-6 bg-base-100 text-base-content rounded-xl shadow-lg hover:scale-105 transition-transform duration-300">
+              <div className="text-5xl mb-4">📤</div>
+              <h3 className="text-xl font-semibold mb-2">Instant Download</h3>
+              <p>
+                One click to get a ready-to-send PDF in your inbox or device.
+              </p>
             </div>
           </div>
         </div>
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-20 bg-gradient-to-br from-base-200 to-base-300">
-        <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center mb-12">
-            What Our Users Say
+      <section className="py-16 bg-base-100">
+        <div className="max-w-6xl mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center mb-10">
+            People Are Talking
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-10">
-            {/* Testimonial 1 */}
-            <div className="card bg-base-100 shadow-xl hover:shadow-2xl transition">
-              <div className="card-body">
-                <p className="text-gray-600">
-                  “I was amazed at how fast and accurate the AI was. My resume
-                  looked polished and got responses within days!”
-                </p>
-                <div className="flex items-center mt-6">
-                  <div className="avatar">
-                    <div className="w-14 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                      <img
-                        src="https://randomuser.me/api/portraits/men/32.jpg"
-                        alt="User"
-                      />
-                    </div>
-                  </div>
-                  <div className="ml-4">
-                    <h4 className="font-bold text-lg">Alex Carter</h4>
-                    <p className="text-sm text-gray-500">
-                      Full Stack Developer
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
 
-            {/* Testimonial 2 */}
-            <div className="card bg-base-100 shadow-xl hover:shadow-2xl transition">
-              <div className="card-body">
-                <p className="text-gray-600">
-                  “The templates are beautiful and easy to use. I finally feel
-                  confident applying to jobs with my new resume!”
-                </p>
-                <div className="flex items-center mt-6">
-                  <div className="avatar">
-                    <div className="w-14 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                      <img
-                        src="https://randomuser.me/api/portraits/women/44.jpg"
-                        alt="User"
-                      />
+          <div className="relative">
+            <div className="overflow-x-auto flex space-x-6 pb-4 snap-x snap-mandatory scrollbar-thin scrollbar-thumb-primary scrollbar-track-base-200">
+              {[
+                {
+                  name: "Alex Carter",
+                  role: "Full Stack Developer",
+                  image: "https://randomuser.me/api/portraits/men/32.jpg",
+                  quote:
+                    "I was amazed at how fast and accurate the AI was. My resume looked polished and got responses within days!",
+                },
+                {
+                  name: "Emily Davis",
+                  role: "UX Designer",
+                  image: "https://randomuser.me/api/portraits/women/44.jpg",
+                  quote:
+                    "The templates are beautiful and easy to use. I finally feel confident applying to jobs!",
+                },
+                {
+                  name: "Ryan Mitchell",
+                  role: "Data Analyst",
+                  image: "https://randomuser.me/api/portraits/men/75.jpg",
+                  quote:
+                    "Super easy to use! It helped me structure my resume perfectly and saved me hours of work.",
+                },
+                {
+                  name: "Sophie Lee",
+                  role: "Product Manager",
+                  image: "https://randomuser.me/api/portraits/women/65.jpg",
+                  quote:
+                    "Thanks to this AI tool, I landed three interviews in one week! Highly recommend it.",
+                },
+                {
+                  name: "Mark Robinson",
+                  role: "Backend Engineer",
+                  image: "https://randomuser.me/api/portraits/men/85.jpg",
+                  quote:
+                    "The AI-generated summary was spot on. Way better than what I had before!",
+                },
+                {
+                  name: "Ava Nguyen",
+                  role: "HR Specialist",
+                  image: "https://randomuser.me/api/portraits/women/68.jpg",
+                  quote:
+                    "Clean UI, amazing suggestions, and instant PDF download. 10/10!",
+                },
+              ].map((testimonial, index) => (
+                <div
+                  key={index}
+                  className="min-w-[280px] max-w-sm bg-base-200 rounded-xl shadow-md p-5 snap-start hover:shadow-lg transition"
+                >
+                  <p className="text-base-content/80 text-sm mb-4 leading-relaxed">
+                    “{testimonial.quote}”
+                  </p>
+                  <div className="flex items-center">
+                    <div className="avatar">
+                      <div className="w-12 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                        <img src={testimonial.image} alt={testimonial.name} />
+                      </div>
+                    </div>
+                    <div className="ml-3">
+                      <h4 className="font-semibold text-base">
+                        {testimonial.name}
+                      </h4>
+                      <p className="text-xs text-base-content/60">
+                        {testimonial.role}
+                      </p>
                     </div>
                   </div>
-                  <div className="ml-4">
-                    <h4 className="font-bold text-lg">Emily Davis</h4>
-                    <p className="text-sm text-gray-500">UX Designer</p>
-                  </div>
                 </div>
-              </div>
+              ))}
             </div>
-
-            {/* Testimonial 3 */}
-            <div className="card bg-base-100 shadow-xl hover:shadow-2xl transition">
-              <div className="card-body">
-                <p className="text-gray-600">
-                  “Super easy to use! It helped me structure my resume perfectly
-                  and saved me hours of work.”
-                </p>
-                <div className="flex items-center mt-6">
-                  <div className="avatar">
-                    <div className="w-14 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                      <img
-                        src="https://randomuser.me/api/portraits/men/75.jpg"
-                        alt="User"
-                      />
-                    </div>
-                  </div>
-                  <div className="ml-4">
-                    <h4 className="font-bold text-lg">Ryan Mitchell</h4>
-                    <p className="text-sm text-gray-500">Data Analyst</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Testimonial 4 */}
-            <div className="card bg-base-100 shadow-xl hover:shadow-2xl transition">
-              <div className="card-body">
-                <p className="text-gray-600">
-                  “Thanks to this AI tool, I landed three interviews in one
-                  week! Highly recommend it to job seekers.”
-                </p>
-                <div className="flex items-center mt-6">
-                  <div className="avatar">
-                    <div className="w-14 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                      <img
-                        src="https://randomuser.me/api/portraits/women/65.jpg"
-                        alt="User"
-                      />
-                    </div>
-                  </div>
-                  <div className="ml-4">
-                    <h4 className="font-bold text-lg">Sophie Lee</h4>
-                    <p className="text-sm text-gray-500">Product Manager</p>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <div className="absolute right-0 top-0 h-full w-10 bg-gradient-to-l from-base-100 to-transparent pointer-events-none" />
           </div>
         </div>
       </section>
 
+      {/* Call to Action Section */}
+      <section className="py-20 bg-base-100">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-4xl font-bold mb-6">
+            Ready to Create Your Resume?
+          </h2>
+          <p className="mb-8 text-lg">
+            Join thousands of users who have landed their dream jobs with our AI
+            resume maker.
+          </p>
+          <Link to={"/generate-resume"} className="btn btn-primary">
+            Get Started Now
+          </Link>
+        </div>
+      </section>
+
       {/* Footer */}
-      <footer className="bg-base-100 text-base-content py-8">
+      <footer className="bg-base-300 text-base-content py-8">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {/* Brand Info */}
@@ -247,8 +237,8 @@ const LandingPage = () => {
 
           {/* Bottom */}
           <div className="border-t border-gray-700 pt-5 text-center text-sm text-gray-500">
-            &copy; {new Date().getFullYear()} AI Resume Builder. All rights
-            reserved.
+            &copy; {new Date().getFullYear()} AI Resume Builder. Just a Fun
+            Project. No rights reserved. 🙂
           </div>
         </div>
       </footer>
