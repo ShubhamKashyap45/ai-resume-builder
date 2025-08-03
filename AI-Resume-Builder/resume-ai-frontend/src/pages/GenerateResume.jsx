@@ -3,10 +3,12 @@ import { FaPaperPlane, FaTrash } from "react-icons/fa";
 import { FaRegFilePdf } from "react-icons/fa";
 import { generateResume } from "../api/ResumeService";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const GenerateResume = () => {
   const [description, setDescription] = useState("");
   const [loading, setLoading] = useState("");
+  const navigate = useNavigate();
 
   const handleGenerate = async () => {
     console.log("Generating resume from:", description);
@@ -15,10 +17,13 @@ const GenerateResume = () => {
       setLoading(true);
       const response = await generateResume(description);
       console.log(response.data);
+
       toast.success("Resume Generate Successfully", {
         duration: 3000,
         position: "top-center",
       });
+
+      navigate("/resume-form", { state: { resumeData: response.data } });
     } catch (error) {
       toast.error("Error while Generation Resume!");
     } finally {
