@@ -45,6 +45,16 @@ const ResumeForm = ({ defaultData, onSubmit }) => {
 
   const renderInput = (name, label, type = "text", isRequired = false) => {
     const fieldId = name.replace(/\./g, "_");
+
+    // Auto-detect date fields
+    if (
+      name.toLowerCase().includes("year") ||
+      name.toLowerCase().includes("durationstart") ||
+      name.toLowerCase().includes("durationend")
+    ) {
+      type = "date";
+    }
+
     const error = name
       .split(".")
       .reduce((acc, key) => (acc && acc[key] ? acc[key] : null), errors);
@@ -165,7 +175,8 @@ const ResumeForm = ({ defaultData, onSubmit }) => {
           "jobTitle",
           "company",
           "location",
-          "duration",
+          "durationStart",
+          "durationEnd",
           "responsibility",
         ])}
         {renderFieldArray("Education", "education", [
@@ -177,7 +188,7 @@ const ResumeForm = ({ defaultData, onSubmit }) => {
         {renderFieldArray("Certifications", "certifications", [
           "title",
           "issuingOrganization",
-          "year",
+          "duration",
         ])}
         {renderFieldArray("Projects", "projects", [
           "title",
