@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useForm, useFieldArray } from "react-hook-form";
+import { useForm, useFieldArray, Controller } from "react-hook-form";
 import { FaPlusCircle, FaTrash } from "react-icons/fa";
 import { BiBook } from "react-icons/bi";
 import toast from "react-hot-toast";
@@ -10,6 +10,7 @@ const ResumeForm = ({ defaultData, onSubmit }) => {
     handleSubmit,
     control,
     reset,
+    watch,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -46,9 +47,13 @@ const ResumeForm = ({ defaultData, onSubmit }) => {
   const renderInput = (name, label, type = "text", isRequired = false) => {
     const fieldId = name.replace(/\./g, "_");
 
-    // Auto-detect date fields
+    // Adjust input type based on field name
     if (
-      name.toLowerCase().includes("year") ||
+      name.toLowerCase().includes("year") &&
+      !name.toLowerCase().includes("duration")
+    ) {
+      type = "number"; // year field as number input
+    } else if (
       name.toLowerCase().includes("durationstart") ||
       name.toLowerCase().includes("durationend")
     ) {
@@ -82,31 +87,62 @@ const ResumeForm = ({ defaultData, onSubmit }) => {
 
   const renderFieldArray = (label, key, keys) => {
     const f = fields[key];
+
     return (
       <div className="form-control w-full mb-8">
         <h3 className="text-xl font-bold mb-2">{label}</h3>
-        {f.fields.map((field, index) => (
-          <div
-            key={field.id}
-            className="border border-base-300 p-4 rounded-lg mb-4"
-          >
-            {keys.map((k) => (
-              <div key={`${field.id}-${k}`}>
-                {renderInput(
-                  `${key}.${index}.${k}`,
-                  k.charAt(0).toUpperCase() + k.slice(1)
-                )}
-              </div>
-            ))}
-            <button
-              type="button"
-              onClick={() => f.remove(index)}
-              className="btn btn-sm btn-error mt-2"
+        {f.fields.map((field, index) => {
+          const isExperience = key === "experience";
+          const watchEndDateField = watch(`${key}.${index}.isCurrent`);
+
+          return (
+            <div
+              key={field.id}
+              className="border border-base-300 p-4 rounded-lg mb-4"
             >
-              <FaTrash className="mr-2" /> Remove {label}
-            </button>
-          </div>
-        ))}
+              {keys.map((k) => {
+                if (isExperience && k === "durationEnd") {
+                  return (
+                    <div key={`${field.id}-end-date-checkbox`}>
+                      <div className="form-control">
+                        <label className="label cursor-pointer">
+                          <input
+                            type="checkbox"
+                            {...register(`${key}.${index}.isCurrent`)}
+                            className="checkbox checkbox-sm"
+                          />
+                          <span className="label-text ml-2">
+                            I currently work here
+                          </span>
+                        </label>
+                      </div>
+                      {!watchEndDateField &&
+                        renderInput(`${key}.${index}.${k}`, "End Date")}
+                    </div>
+                  );
+                }
+                if (k !== "isCurrent") {
+                  return (
+                    <div key={`${field.id}-${k}`}>
+                      {renderInput(
+                        `${key}.${index}.${k}`,
+                        k.charAt(0).toUpperCase() + k.slice(1)
+                      )}
+                    </div>
+                  );
+                }
+                return null;
+              })}
+              <button
+                type="button"
+                onClick={() => f.remove(index)}
+                className="btn btn-sm btn-error mt-2"
+              >
+                <FaTrash className="mr-2" /> Remove {label}
+              </button>
+            </div>
+          );
+        })}
         <button
           type="button"
           onClick={() =>
@@ -170,13 +206,14 @@ const ResumeForm = ({ defaultData, onSubmit }) => {
           )}
         </div>
 
-        {renderFieldArray("Skills", "skills", ["title", "level"])}
+        {renderFieldArray("Skills", "skills", ["title"])}
         {renderFieldArray("Experience", "experience", [
           "jobTitle",
           "company",
           "location",
           "durationStart",
           "durationEnd",
+          "isCurrent",
           "responsibility",
         ])}
         {renderFieldArray("Education", "education", [

@@ -11,6 +11,7 @@ import Contact from "./pages/Contact";
 import GenerateResume from "./pages/GenerateResume";
 import { Toaster } from "react-hot-toast";
 import ResumeFormPage from "./pages/ResumeFormPage";
+import ResumePreviewPage from "./pages/ResumePreviewPage";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -24,6 +25,7 @@ createRoot(document.getElementById("root")).render(
           <Route path="contact" element={<Contact />}></Route>
           <Route path="generate-resume" element={<GenerateResume />}></Route>
           <Route path="resume-form" element={<ResumeFormPage />} />
+          <Route path="/preview-resume" element={<ResumePreviewPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

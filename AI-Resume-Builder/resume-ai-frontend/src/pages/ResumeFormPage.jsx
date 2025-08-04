@@ -23,6 +23,7 @@ const ResumeFormPage = () => {
   const handleFormSubmit = (data) => {
     console.log("Final form submitted:", data);
     toast.success("Form submitted!");
+    navigate("/preview-resume", { state: { resumeData: data } });
   };
 
   return <ResumeForm defaultData={resumeData} onSubmit={handleFormSubmit} />;
