@@ -61,7 +61,7 @@ JSON Structure Requirements:
   "achievements": [
     {
       "title": "string",
-      "year": "string (format: 'dd-mm-yyyy')",
+      "year": "string",
       "extraInformation": "string"
     }
   ],
