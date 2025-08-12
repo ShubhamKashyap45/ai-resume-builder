@@ -10,6 +10,6 @@ export default {
   },
   plugins: [daisyui, scrollbar, scrollbarHide],
   daisyui: {
-    themes: ["night", "wireframe", "cyberpunk"],
+    themes: ["wireframe", "cyberpunk"],
   },
 };

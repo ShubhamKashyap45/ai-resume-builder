@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FaPaperPlane, FaTrash } from "react-icons/fa";
-import { FaRegFilePdf } from "react-icons/fa";
+import { FaRobot } from "react-icons/fa6";
 import { generateResume } from "../api/ResumeService";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
@@ -18,14 +18,14 @@ const GenerateResume = () => {
       const response = await generateResume(description);
       console.log(response.data);
 
-      toast.success("Resume Generate Successfully", {
+      toast.success("Resume Generated Successfully", {
         duration: 3000,
         position: "top-center",
       });
 
       navigate("/resume-form", { state: { resumeData: response.data } });
     } catch (error) {
-      toast.error("Error while Generation Resume!");
+      toast.error("Error while Generating Resume!");
     } finally {
       setLoading(false);
       setDescription("");
@@ -37,40 +37,42 @@ const GenerateResume = () => {
   };
 
   return (
-    <div className="min-h-screen bg-base-200 flex items-center justify-center px-4 py-12">
-      <div className="w-full max-w-3xl bg-base-100 rounded-2xl shadow-xl p-10">
-        <h1 className="text-4xl md:text-5xl font-bold text-center mb-4 flex items-center justify-center gap-3">
-          <FaRegFilePdf className="text-primary" /> AI Resume Generator
-        </h1>
-        <p className="text-center text-base text-gray-500 mb-8 max-w-xl mx-auto">
-          Describe your experience and skills below. Our AI will craft a resume
-          summary for you.
-        </p>
+    <div className="h-screen w-screen bg-gradient-to-br from-indigo-100 via-white to-indigo-200 flex flex-col items-center justify-center p-6">
+      {/* Header */}
+      <h1 className="text-4xl md:text-5xl font-bold mb-4 flex items-center gap-3 text-indigo-700">
+        <FaRobot className="text-indigo-500" />
+        AI Resume Generator
+      </h1>
+      <p className="text-base md:text-lg text-gray-600 mb-8 max-w-2xl text-center">
+        Describe your experience and skills below. Our AI will craft a
+        professional resume summary for you.
+      </p>
 
-        <textarea
+      {/* Textarea */}
+      <textarea
+        disabled={loading}
+        className="textarea textarea-bordered w-full max-w-4xl h-56 mb-6 resize-none text-base leading-relaxed bg-white border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-400"
+        placeholder="e.g. Experienced Java Developer skilled in Spring Boot, React, and REST APIs..."
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
+      ></textarea>
+
+      {/* Buttons */}
+      <div className="flex gap-4">
+        <button
           disabled={loading}
-          className="textarea textarea-bordered w-full h-56 mb-6 resize-none text-base leading-relaxed bg-base-100"
-          placeholder="e.g. Experienced Java Developer skilled in Spring Boot, React, and REST APIs..."
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-        ></textarea>
-
-        <div className="flex justify-center gap-4">
-          <button
-            disabled={loading}
-            onClick={handleGenerate}
-            className="btn btn-primary px-6 text-base font-semibold flex items-center gap-2"
-          >
-            {loading && <span className="loading loading-spinner"></span>}
-            <FaPaperPlane /> Generate
-          </button>
-          <button
-            onClick={handleClear}
-            className="btn btn-outline px-6 text-base font-semibold flex items-center gap-2"
-          >
-            <FaTrash /> Clear
-          </button>
-        </div>
+          onClick={handleGenerate}
+          className="btn bg-indigo-600 hover:bg-indigo-700 text-white px-6 text-base font-semibold flex items-center gap-2 rounded-lg"
+        >
+          {loading && <span className="loading loading-spinner"></span>}
+          <FaPaperPlane /> Generate
+        </button>
+        <button
+          onClick={handleClear}
+          className="btn border border-gray-400 text-gray-700 hover:bg-gray-100 px-6 text-base font-semibold flex items-center gap-2 rounded-lg"
+        >
+          <FaTrash /> Clear
+        </button>
       </div>
     </div>
   );
