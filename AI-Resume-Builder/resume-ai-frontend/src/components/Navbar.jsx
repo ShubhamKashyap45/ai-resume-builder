@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 
 function Navbar() {
   return (
@@ -60,7 +60,9 @@ function Navbar() {
           </ul>
         </div>
         <div className="navbar-end">
-          <a className="btn">Login</a>
+          <Link to="/auth" className="btn btn-primary">
+            Login
+          </Link>
         </div>
       </div>
     </div>

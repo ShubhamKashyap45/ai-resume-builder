@@ -1,8 +1,8 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
-import { BrowserRouter, Route } from "react-router";
-import { Routes } from "react-router";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+// import { Routes } from "react-router";
 import Root from "./pages/Root";
 import Home from "./pages/Home";
 import About from "./pages/About";
@@ -12,6 +12,7 @@ import GenerateResume from "./pages/GenerateResume";
 import { Toaster } from "react-hot-toast";
 import ResumeFormPage from "./pages/ResumeFormPage";
 import ResumePreviewPage from "./pages/ResumePreviewPage";
+import LoginSignup from "./pages/LoginSignup";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -26,6 +27,7 @@ createRoot(document.getElementById("root")).render(
           <Route path="generate-resume" element={<GenerateResume />}></Route>
           <Route path="resume-form" element={<ResumeFormPage />} />
           <Route path="/preview-resume" element={<ResumePreviewPage />} />
+          <Route path="auth" element={<LoginSignup />} />
         </Route>
       </Routes>
     </BrowserRouter>
